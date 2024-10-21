@@ -7,35 +7,19 @@ const initialGameBoard = [
     [null, null, null]
 ]
 // eslint-disable-next-line react/prop-types
-export default function GameBoard({ onSelectPlayer, turns }) {
+export default function GameBoard({ onSelectPlayer, board }) {
 
-    let gameBoard = initialGameBoard;
+    let gameBoard = board;
 
-    for (const turn of turns) {
-        const { square, player } = turn
-        const { row, col } = square
-
-        gameBoard[row][col] = player
-    }
-    // const [gameBoard, setGameBoard] = useState(initialGameBoard)
-    // const handleSelectSquare = (rowIndex, colIndex) => {
-    //     setGameBoard((prevGameBoard) => {
-    //         const updatedBoard = [...prevGameBoard.map(innerArray => [...innerArray])]
-    //         updatedBoard[rowIndex][colIndex] = activePlayer
-
-    //         return updatedBoard
-    //     })
-    //     onSelectPlayer()
-    // }
     return <ol id="game-board">
         {
             gameBoard.map((row, rowIndex) =>
                 <li key={rowIndex}>
                     <ol >
-                        {row.map((playerIndex, colIndex) =>
+                        {row.map((playerSymbol, colIndex) =>
                             <li key={colIndex}>
-                                <button onClick={() => { onSelectPlayer(rowIndex, colIndex) }}>
-                                    {playerIndex}
+                                <button onClick={() => { onSelectPlayer(rowIndex, colIndex) }} disabled={playerSymbol !== null}>
+                                    {playerSymbol}
                                 </button>
                             </li>)
                         }
