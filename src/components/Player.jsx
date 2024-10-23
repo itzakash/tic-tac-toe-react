@@ -1,20 +1,18 @@
 /* eslint-disable no-unused-vars */
 import { useState } from "react"
 // eslint-disable-next-line react/prop-types
-export default function Player({ name, symbol, isActive }) {
+export default function Player({ name, symbol, isActive,onChange }) {
     const [isEditing, setIsEditing] = useState(false)
     const [playerName, setPlayerName] = useState(name)
 
     const handleEditing = () => {
-
-
         setIsEditing((editing) => !editing)
-
-
+        isEditing && onChange(symbol, playerName)
     }
 
     const handlePlayerName = (e) => {
         setPlayerName(e.target.value)
+        
     }
     return <li className={isActive ? 'active' : undefined}>
         <span className='player'>
